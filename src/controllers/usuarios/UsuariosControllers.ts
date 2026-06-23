@@ -1,10 +1,19 @@
 import { Request, Response } from "express";
 
+import {UsuariosServices} from "../../services/usuarios/UsuariosServices"
+
 class UsuariosControllers {
     async cadastrarUsuario(req: Request, res: Response) {
         const { nome, email, senha, telefone } = req.body
-        console.log(nome, email, senha, telefone)
-           
+        const enviarDadosService = new UsuariosServices()
+        const resultado = await enviarDadosService.cadastrarUsuario({ 
+            nome,
+            email, 
+            senha,
+            telefone 
+        })
+
+        return res.json(resultado)           
         }
     }
 
