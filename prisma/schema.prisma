@@ -14,15 +14,72 @@ datasource db {
 }
 
 model Usuario {
-  id       String    @id @default(uuid())
+  id       String  @id @default(uuid())
   nome     String
-  email    String 
+  email    String @unique 
   senha    String
   telefone String
-  status   Boolean   @default(true)
+  status   Boolean @default(true)
 
-  data_criacao DateTime  @default(now())
+  data_criacao     DateTime @default(now())
   data_atualizacao DateTime @updatedAt
 
   @@map("usuarios")
+}
+
+model Produto {
+  id            String  @id @default(uuid())
+  nome          String
+  descricao     String
+  status        Boolean @default(true)
+  codigo_barras String  @unique
+  categoria     String
+  preco_custo   Float
+  preco_venda   Float
+
+  data_criacao     DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+
+  @@map("produtos")
+}
+
+model Cliente {
+  id           String   @id @default(uuid())
+  nome         String
+  cpf_cnpj     String   @unique
+  email        String
+  telefone     String
+  cidade       String
+  estado       String
+  cep          String
+  data_criacao DateTime @default(now())
+  complemento  String
+
+  @@map("clientes")
+}
+
+model Venda {
+  id              String   @id @default(uuid())
+  id_cliente      String
+  id_usuario      String
+  data_venda      DateTime @default(now())
+  valor_total     Float
+  forma_pagamento String
+  status          String
+  numero_pedido   String
+
+  @@map("vendas")
+}
+
+model ItemVenda {
+  id                 String @id @default(uuid())
+  id_venda           String
+  id_produto         String
+  quantidade         Int
+  valor_unitario     Float
+  subtotal           Float
+  venda_id_venda     String
+  id_produto_produto String
+
+  @@map("item_vendas")
 }
