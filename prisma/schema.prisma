@@ -21,6 +21,9 @@ model Usuario {
   telefone String
   status   Boolean @default(true)
 
+  cargo cargos @relation(fields: [id_cargo], references: [id] )
+  id_cargo String
+
   data_criacao     DateTime @default(now())
   data_atualizacao DateTime @updatedAt
 
@@ -82,4 +85,16 @@ model ItemVenda {
   id_produto_produto String
 
   @@map("item_vendas")
+}
+
+model cargos {
+  id   String @id @default(uuid())
+  nome String
+
+usuario Usuario[]
+
+  id_criacao     DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+
+  @@map("cargos")
 }

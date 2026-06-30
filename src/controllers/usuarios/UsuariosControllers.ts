@@ -10,7 +10,8 @@ class UsuariosControllers {
             nome,
             email, 
             senha,
-            telefone 
+            telefone,
+            id_cargos: req.body.id_cargos
         })
 
         return res.json(resultado)           

@@ -8,13 +8,13 @@ interface cadastrarUsuario {
     email: string;
     senha: string;
     telefone: string;
+    id_cargos: string;
 }
-
 
 
 class UsuariosServices {
 
-    async cadastrarUsuario({ nome, email, senha, telefone }: cadastrarUsuario) {
+    async cadastrarUsuario({ nome, email, senha, telefone, id_cargos }: cadastrarUsuario) {
 
         const emailExiste= await prismaClient.usuario.findFirst({
             where:{
@@ -31,7 +31,8 @@ class UsuariosServices {
                 nome: nome,
                 email: email,            
                 senha: senha,
-                telefone: telefone
+                telefone: telefone,
+                id_cargo: id_cargos
             }
         })
 
