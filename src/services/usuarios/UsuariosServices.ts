@@ -65,6 +65,13 @@ class UsuariosServices {
         const resposta = await prismaClient.usuario.findFirst({
             where: {
                 id: id
+            },
+            select: {
+                id: true, 
+                nome: true,
+                email: true,
+                status: true,
+                telefone: true
             }
         })
 
