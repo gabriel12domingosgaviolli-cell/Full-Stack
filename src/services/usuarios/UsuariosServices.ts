@@ -10,6 +10,9 @@ interface cadastrarUsuario {
     telefone: string;
     id_cargos: string;
 }
+interface visualizarUsuarioUnico {
+    id: string;
+}
 
 
 class UsuariosServices {
@@ -34,11 +37,38 @@ class UsuariosServices {
                 telefone: telefone,
                 id_cargo: id_cargos
             }
+            
         })
 
         
 
         return ({ dados: "dados salvos com sucesso" })
+
+    }
+
+    async visualizarDadosGeral() {
+        const resposta = await prismaClient.usuario.findMany({
+            select: {
+                id: true, 
+                nome: true,
+                email: true, 
+                status: true, 
+                telefone: true, 
+            }        
+        })
+
+
+        return resposta
+    }
+
+    async visualizarUsuarioUnico(id: string) {
+        const resposta = await prismaClient.usuario.findFirst({
+            where: {
+                id: id
+            }
+        })
+
+        return resposta
 
     }
 }

@@ -16,7 +16,19 @@ class UsuariosControllers {
 
         return res.json(resultado)           
         }
-    }
 
+        async visualizarDadosGeral(req: Request, res: Response) {
+            const enviarDados = new UsuariosServices()
+            const resposta = await enviarDados.visualizarDadosGeral()
+            return res.json(resposta)
+        }
+
+        async visualizarUsuarioUnicoPOST(req: Request, res: Response) {
+            const { id } = req.body
+            const enviarDados = new UsuariosServices()
+            const resposta = await enviarDados.visualizarUsuarioUnico(id)
+            return res.json(resposta)
+        }
+}
 
 export { UsuariosControllers }
