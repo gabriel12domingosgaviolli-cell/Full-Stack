@@ -11,6 +11,7 @@ class UsuariosControllers {
             email, 
             senha,
             telefone,
+            status: true,
             id_cargos: req.body.id_cargos
         })
 
@@ -34,6 +35,28 @@ class UsuariosControllers {
             const { id } = req.params
             const enviarDados = new UsuariosServices()
             const resposta = await enviarDados.visualizarUsuarioUnicoGet(id)
+            return res.json(resposta)
+        }
+        async alterarUsuario(req: Request, res: Response) {
+            const {id, nome, email, status,senha, telefone, id_cargo} = req.body
+            const enviarDados = new UsuariosServices()
+            const resposta = await enviarDados.alterarUsuario({
+                id,
+                nome,
+                email,
+                senha,
+                status,
+                telefone,
+                id_cargo
+            })
+
+            return res.json(resposta)
+           
+        }
+        async ApagarUsuario(req: Request, res: Response) {
+            const { id } = req.body
+            const enviarDados = new UsuariosServices()
+            const resposta = await enviarDados.ApagarUsuario(id)
             return res.json(resposta)
         }
 }

@@ -3,6 +3,7 @@ import {Router } from 'express'
 // Importação dos controladores
 import { UsuariosControllers } from './controllers/usuarios/UsuariosControllers'
 import { CargosControllers } from './controllers/cargos/cargoscontrollers'
+import { UsuariosServices } from './services/usuarios/UsuariosServices'
  
 const router = Router()/// istansiando o Router do express, para criar as rotas
 
@@ -17,6 +18,10 @@ router.get('/visualizarUsuarioUnicoGet/:id', new UsuariosControllers().visualiza
 router.get('/visualizarUsuarios', new UsuariosControllers().visualizarDadosGeral)
 
 router.post('/CadastrarCargos', new CargosControllers().cadastrarCargo)
+
+router.put('/alterarUsuario', new UsuariosControllers().alterarUsuario)
+
+router.delete('/ApagarUsuario', new UsuariosServices().ApagarUsuario)
  
 export default router
  
